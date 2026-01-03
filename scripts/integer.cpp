@@ -12,7 +12,7 @@
 #define M_PI 3.14159265358979323846
 
 using namespace std;
-using ll = long long;
+using ll = ll;
 
 unsigned gcd(unsigned m, unsigned n) {
 	if (n == 0) return m;
@@ -90,3 +90,25 @@ ll eulerMethod(ll n) {
 		result /= p.first;
 	}
 	return result;
+
+ll modpow(ll a, ll n, ll mod) {
+	ll result = 1;
+	while (n > 0) {
+		if (n & 1) result = result * a % mod;
+		a = a * a % mod;
+		n >>= 1;
+	}
+	return result;
+}
+
+ll modinv(ll a, ll mod) {
+	ll b = mod, u = 1, v = 0;
+	while (b) {
+		ll t = a / b;
+		a -= t * b; swap(a, b);
+		u -= t * v; swap(u, v);
+	}
+	u %= mod;
+	if (u < 0) u += mod;
+	return u;
+}
