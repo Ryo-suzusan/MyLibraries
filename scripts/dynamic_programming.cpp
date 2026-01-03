@@ -70,3 +70,22 @@ ll bitDP(vector<vector<ll>>& dp, vector<vector<ll>>& dist, ll bit, ll v) {
 
 	return dp[bit][v] = result;
 }
+
+// いもす法: 左上, 右下を+1、右上, 左下を-1で初期化済みとする
+void imosCumulate(Graph& tiles) {
+	int h = tiles.size();
+	int w = tiles[0].size();
+
+	// 横方向の累積和
+	for (int y = 0; y < h; y++) {
+		for (int x = 1; x < h; x++) {
+			tiles[y][x] += tiles[y][x - 1];
+		}
+	}
+	// 縦方向の累積和
+	for (int y = 1; y < h; y++) {
+		for (int x = 0; x < h; x++) {
+			tiles[y][x] += tiles[y - 1][x];
+		}
+	}
+}
