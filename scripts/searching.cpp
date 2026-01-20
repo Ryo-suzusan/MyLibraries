@@ -52,7 +52,7 @@ void dfs(const Graph& g, int start, vector<bool>& seen) {
 void bfs(const Graph& g, int start, vector<bool>& seen) {
 	queue<ll> q;
 
-	seen[start] = 0;
+	seen[start] = true;
 	q.push(start);
 
 	while (!q.empty()) {
@@ -67,4 +67,5 @@ void bfs(const Graph& g, int start, vector<bool>& seen) {
 		}
 	}
 }
+
 
