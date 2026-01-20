@@ -88,7 +88,7 @@ void gridDfs(const Grid& g, pair<int, int> start, Grid& seen) {
 			continue;
 		}
 
-		if (seen[rIdx][cIdx]) continue;
+		if (seen[rIdx][cIdx] || !g[rIdx][cIdx]) continue;
 		gridDfs(g, { rIdx, cIdx }, seen);
 	}
 }
@@ -113,10 +113,11 @@ void gridBfs(const Grid& g, pair<int, int> start, Grid& seen) {
 				continue;
 			}
 
-			if (seen[rIdx][cIdx]) continue;
+			if (seen[rIdx][cIdx] || !g[rIdx][cIdx]) continue;
 
 			seen[rIdx][cIdx] = true;
 			q.emplace(rIdx, cIdx);
 		}
 	}
 }
+
