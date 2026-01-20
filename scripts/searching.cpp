@@ -7,11 +7,9 @@
 #include <sstream>
 #include <algorithm>
 #include <limits>
-#include <climits>
 #include <tuple>
 #include <map>
 #include <set>
-#include <random>
 
 #define M_PI 3.14159265358979323846
 
@@ -50,13 +48,13 @@ void dfs(const Graph& g, int start, vector<bool>& seen) {
 }
 
 void bfs(const Graph& g, int start, vector<bool>& seen) {
-	queue<ll> q;
+	queue<int> q;
 
 	seen[start] = true;
 	q.push(start);
 
 	while (!q.empty()) {
-		ll v = q.front();
+		int v = q.front();
 		q.pop();
 
 		for (int nextV : g[v]) {
@@ -68,4 +66,57 @@ void bfs(const Graph& g, int start, vector<bool>& seen) {
 	}
 }
 
+// pair<row, column>
+const vector<pair<int, int>> direction = {
+	{0, 1},
+	{0, -1},
+	{1, 0},
+	{-1, 0}
+};
+using Grid = vector<vector<bool>>;
 
+void gridDfs(const Grid& g, pair<int, int> start, Grid& seen) {
+	seen[start.first][start.second] = true;
+
+	for (auto dr : direction) {
+		int rIdx = start.first + dr.first;
+		int cIdx = start.second + dr.second;
+		if ((int)seen.size() <= rIdx ||
+			rIdx < 0 ||
+			(int)seen[0].size() <= cIdx ||
+			cIdx < 0) {
+			continue;
+		}
+
+		if (seen[rIdx][cIdx]) continue;
+		gridDfs(g, { rIdx, cIdx }, seen);
+	}
+}
+
+void gridBfs(const Grid& g, pair<int, int> start, Grid& seen) {
+	queue<pair<int, int>> q;
+
+	seen[start.first][start.second] = true;
+	q.emplace(start.first, start.second);
+
+	while (!q.empty()) {
+		pair<int, int> v = q.front();
+		q.pop();
+
+		for (auto dr : direction) {
+			int rIdx = v.first + dr.first;
+			int cIdx = v.second + dr.second;
+			if ((int)seen.size() <= rIdx ||
+				rIdx < 0 ||
+				(int)seen[0].size() <= cIdx ||
+				cIdx < 0) {
+				continue;
+			}
+
+			if (seen[rIdx][cIdx]) continue;
+
+			seen[rIdx][cIdx] = true;
+			q.emplace(rIdx, cIdx);
+		}
+	}
+}
