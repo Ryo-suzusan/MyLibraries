@@ -18,14 +18,18 @@
 
 using namespace std;
 using ll = long long;
-using Graph = vector<vector<ll>>;
+using IGraph = vector<vector<int>>;
+using BGraph = vector<vector<bool>>;
 
-void knapsackDP(const vector<ll>& weight, const vector<ll>& value, vector<vector<ll>>& dp) {
-	// dpは事前にサイズ[データ数][最大重量]で初期化済みとする
-	ll N = dp.size();
-	ll W = dp[0].size();
-	for (ll i = 0; i < N; i++) {
-		for (ll w = 0; w <= W; w++) {
+void knapsackDP(const vector<int>& weight, const vector<int>& value, IGraph& dp) {
+	// dpは事前にサイズ[データ数 + 1][最大重量 + 1]で初期化済みとする
+	int N = (int)dp.size() - 1;
+	int W = (int)dp[0].size() - 1;
+	// 初期条件: dp[0][w] = 0
+	for (int w = 0; w <= W; w++) dp[0][w] = 0;
+
+	for (int i = 0; i < N; i++) {
+		for (int w = 0; w <= W; w++) {
 			if (w >= weight[i]) dp[i + 1][w] = max(dp[i][w - weight[i]] + value[i], dp[i][w]);
 			else dp[i + 1][w] = dp[i][w];
 		}
@@ -89,3 +93,4 @@ void imosCumulate(Graph& tiles) {
 		}
 	}
 }
+
