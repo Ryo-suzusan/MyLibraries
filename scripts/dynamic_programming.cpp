@@ -28,10 +28,10 @@ void knapsackDP(const vector<int>& weight, const vector<int>& value, IGraph& dp)
 	// 初期条件: dp[0][w] = 0
 	for (int w = 0; w <= W; w++) dp[0][w] = 0;
 
-	for (int i = 0; i < N; i++) {
+	for (int i = 1; i <= N; i++) {
 		for (int w = 0; w <= W; w++) {
-			if (w >= weight[i]) dp[i + 1][w] = max(dp[i][w - weight[i]] + value[i], dp[i][w]);
-			else dp[i + 1][w] = dp[i][w];
+			if (w >= weight[i]) dp[i][w] = max(dp[i - 1][w - weight[i - 1]] + value[i - 1], dp[i - 1][w]);
+			else dp[i][w] = dp[i - 1][w];
 		}
 	}
 }
@@ -93,4 +93,5 @@ void imosCumulate(Graph& tiles) {
 		}
 	}
 }
+
 
