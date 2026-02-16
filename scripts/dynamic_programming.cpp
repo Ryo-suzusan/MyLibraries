@@ -34,6 +34,14 @@ void knapsackDP(const vector<int>& weight, const vector<int>& value, IGraph& dp)
 			else dp[i + 1][w] = dp[i][w];
 		}
 	}
+
+	// デバッグ用
+	for (int i = 0; i <= N; i++) {
+		for (int w = 0; w <= W; w++) {
+			cout << dp[i][w] << " ";
+		}
+		cout << endl;
+	}
 }
 
 ll intervalDP(vector<vector<ll>>& dp, ll left, ll right) {
@@ -93,6 +101,7 @@ void imosCumulate(Graph& tiles) {
 		}
 	}
 }
+
 
 
 
