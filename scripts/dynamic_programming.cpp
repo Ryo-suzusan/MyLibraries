@@ -68,6 +68,7 @@ ll bitDP(vector<vector<ll>>& dp, vector<vector<ll>>& dist, int bit, int v) {
 	// bit: 全体集合の部分集合を表すビット列
 	// -1は未探索
 	if (dp[bit][v] != -1) return dp[bit][v];
+	// 初期値
 	if (bit == (1ll << v)) return dp[bit][v] = 0;
 
 	ll result = numeric_limits<ll>::max();
@@ -102,6 +103,7 @@ void imosCumulate(Graph& tiles) {
 		}
 	}
 }
+
 
 
 
