@@ -19,9 +19,10 @@
 using namespace std;
 using ll = long long;
 using IGraph = vector<vector<int>>;
+using LLGraph = vector<vector<ll>>;
 using BGraph = vector<vector<bool>>;
 
-void knapsackDP(const vector<int>& weight, const vector<int>& value, IGraph& dp) {
+void knapsackDP(const vector<ll>& weight, const vector<ll>& value, LLGraph& dp) {
 	// dpは事前にサイズ[データ数 + 1][最大重量 + 1]で初期化済みとする
 	int N = (int)dp.size() - 1;
 	int W = (int)dp[0].size() - 1;
@@ -44,7 +45,7 @@ void knapsackDP(const vector<int>& weight, const vector<int>& value, IGraph& dp)
 	}
 }
 
-ll intervalDP(vector<vector<ll>>& dp, ll left, ll right) {
+ll intervalDP(vector<vector<ll>>& dp, int left, int right) {
 	// -1は未探索
 	if (dp[left][right] != -1) return dp[left][right];
 	if (abs(left - right) < 1) return dp[left][right] = 0;
@@ -53,16 +54,16 @@ ll intervalDP(vector<vector<ll>>& dp, ll left, ll right) {
 	// 適切に初期化
 	result = right - left;
 
-	for (ll mid = left + 1; mid < right; mid++) {
+	for (int mid = left + 1; mid < right; mid++) {
 		result = max(result, intervalDP(dp, left, mid) + intervalDP(dp, mid, right));
 	}
 
 	return dp[left][right] = result;
 }
 
-ll bitDP(vector<vector<ll>>& dp, vector<vector<ll>>& dist, ll bit, ll v) {
+ll bitDP(vector<vector<ll>>& dp, vector<vector<ll>>& dist, int bit, int v) {
 	// dpは事前にサイズ[1<<データ数][データ数]で初期化済みとする
-	ll N = dp[0].size();
+	int N = dp[0].size();
 
 	// bit: 全体集合の部分集合を表すビット列
 	// -1は未探索
@@ -70,10 +71,10 @@ ll bitDP(vector<vector<ll>>& dp, vector<vector<ll>>& dist, ll bit, ll v) {
 	if (bit == (1ll << v)) return dp[bit][v] = 0;
 
 	ll result = numeric_limits<ll>::max();
-	ll prevBit = bit & ~(1 << v);
+	int prev_bit = bit & ~(1 << v);
 
-	for (ll u = 0; u < N; u++) {
-		if (!(prevBit & (1ll << u))) continue;
+	for (int u = 0; u < N; u++) {
+		if (!(prevBit & (1 << u))) continue;
 
 		if (result > bitDP(dp, dist, prevBit, u) + dist[u][v]) {
 			result = bitDP(dp, dist, prevBit, u) + dist[u][v];
@@ -101,6 +102,7 @@ void imosCumulate(Graph& tiles) {
 		}
 	}
 }
+
 
 
 
