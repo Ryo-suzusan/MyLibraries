@@ -69,7 +69,7 @@ ll bitDP(vector<vector<ll>>& dp, vector<vector<ll>>& dist, int bit, int v) {
 	// -1は未探索
 	if (dp[bit][v] != -1) return dp[bit][v];
 	// 初期値
-	if (bit == (1ll << v)) return dp[bit][v] = 0;
+	if (bit == (1 << v)) return dp[bit][v] = 0;
 
 	ll result = numeric_limits<ll>::max();
 	int prev_bit = bit & ~(1 << v);
@@ -103,6 +103,7 @@ void imosCumulate(Graph& tiles) {
 		}
 	}
 }
+
 
 
 
