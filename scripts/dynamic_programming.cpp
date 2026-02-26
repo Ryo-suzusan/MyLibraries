@@ -61,7 +61,7 @@ ll intervalDP(vector<vector<ll>>& dp, int left, int right) {
 	return dp[left][right] = result;
 }
 
-ll bitDP(vector<vector<ll>>& dp, vector<vector<ll>>& dist, int bit, int v) {
+ll bitDP(vector<vector<ll>>& dp, const vector<vector<ll>>& dist, int bit, int v) {
 	// dpは事前にサイズ[1<<データ数][データ数]で初期化済みとする
 	int N = dp[0].size();
 
@@ -103,6 +103,7 @@ void imosCumulate(Graph& tiles) {
 		}
 	}
 }
+
 
 
 
