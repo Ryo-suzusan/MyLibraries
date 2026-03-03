@@ -75,7 +75,7 @@ ll bitDP(vector<vector<ll>>& dp, const vector<vector<ll>>& dist, int bit, int v)
 	int prev_bit = bit & ~(1 << v);
 
 	for (int u = 0; u < N; u++) {
-		if (!(prevBit & (1 << u))) continue;
+		if (!(prev_bit & (1 << u))) continue;
 
 		if (result > bitDP(dp, dist, prevBit, u) + dist[u][v]) {
 			result = bitDP(dp, dist, prevBit, u) + dist[u][v];
@@ -103,6 +103,7 @@ void imosCumulate(Graph& tiles) {
 		}
 	}
 }
+
 
 
 
