@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <cmath>
 #include <vector>
 #include <stack>
@@ -11,11 +12,17 @@
 #include <map>
 #include <set>
 
-#define M_PI 3.14159265358979323846
-
 using namespace std;
 using ll = long long;
-using Graph = vector<vector<ll>>;
+using IGraph = vector<vector<int>>;
+using LLGraph = vector<vector<ll>>;
+using BGraph = vector<vector<bool>>;
+
+#define M_PI 3.14159265358979323846
+#define MOD 10007
+constexpr int kIMax = numeric_limits<int>::max();
+constexpr ll kLLMax = numeric_limits<ll> ::max();
+
 
 // めぐる式二分探索
 ll binarySearch(const vector<ll>& v, ll key) {
@@ -38,7 +45,7 @@ ll binarySearch(const vector<ll>& v, ll key) {
 	return ok;
 }
 
-void dfs(const Graph& g, int start, vector<bool>& seen) {
+void dfs(const LLGraph& g, int start, vector<bool>& seen) {
 	seen[start] = true;
 
 	for (auto nextV : g[start]) {
@@ -47,10 +54,11 @@ void dfs(const Graph& g, int start, vector<bool>& seen) {
 	}
 }
 
-void bfs(const Graph& g, int start, vector<bool>& seen) {
-	queue<int> q;
-
+void bfs(const LLGraph& g, int start) {
+	vector<bool> seen(g.size());
 	seen[start] = true;
+	
+	queue<int> q;
 	q.push(start);
 
 	while (!q.empty()) {
@@ -120,4 +128,5 @@ void gridBfs(const Grid& g, pair<int, int> start, Grid& seen) {
 		}
 	}
 }
+
 
