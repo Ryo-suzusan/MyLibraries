@@ -77,12 +77,29 @@ ll bitDP(vector<vector<ll>>& dp, const vector<vector<ll>>& dist, int bit, int v)
 	for (int u = 0; u < N; u++) {
 		if (!(prev_bit & (1 << u))) continue;
 
-		if (result > bitDP(dp, dist, prevBit, u) + dist[u][v]) {
-			result = bitDP(dp, dist, prevBit, u) + dist[u][v];
+		if (result > bitDP(dp, dist, prev_bit, u) + dist[u][v]) {
+			result = bitDP(dp, dist, prev_bit, u) + dist[u][v];
 		}
 	}
 
 	return dp[bit][v] = result;
+}
+
+vector<ll> makeLIS(vector<ll> v) {
+	vector<ll> dp;
+
+	for (const auto& elem : v) {
+		auto it = lower_bound(dp.begin(), dp.end(), elem);
+
+		if (it == dp.end()) {
+			dp.push_back(elem);
+		}
+		else {
+			*it = elem;
+		}
+	}
+
+	return dp;
 }
 
 // いもす法: 左上, 右下を+1、右上, 左下を-1で初期化済みとする
@@ -103,6 +120,7 @@ void imosCumulate(Graph& tiles) {
 		}
 	}
 }
+
 
 
 
