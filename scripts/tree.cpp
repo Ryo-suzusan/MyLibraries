@@ -77,7 +77,7 @@ class UnionFind
 private:
 	// m_parentsOrSize[i] は i の 親,
 	// ただし root の場合は (-1 * そのグループに属する要素数)
-	std::vector<int> m_parentsOrSize;
+	vector<int> m_parentsOrSize;
 public:
 	UnionFind() = default;
 
@@ -115,7 +115,7 @@ public:
 			if (this->size(a) < this->size(b))
 			{
 				// bをaの子にする
-				std::swap(a, b);
+				swap(a, b);
 			}
 
 			m_parentsOrSize[a] += m_parentsOrSize[b];
@@ -146,12 +146,12 @@ struct EdgeDetail
 	int from;
 	int to;
 	ll cost;
-	bool operator <(const Edge& other) const {
+	bool operator <(const EdgeDetail& other) const {
 		return (cost < other.cost);
 	}
 };
 // 最小全域木の重みを返す
-ll kruskal(const vector<EdgeDetail>& edges, int vnum) {
+ll kruskal(vector<EdgeDetail>& edges, int vnum) {
 	// 辺をコストの小さい順にソート
 	sort(edges.begin(), edges.end());
 
