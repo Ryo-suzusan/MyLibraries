@@ -112,7 +112,7 @@ public:
 		if (a != b)
 		{
 			// union by size (小さいほうが子になる）
-			if (this->size(a) < this->size(b))
+			if (m_parentsOrSize[a] > m_parentsOrSize[b])
 			{
 				// bをaの子にする
 				swap(a, b);
