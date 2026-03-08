@@ -23,8 +23,8 @@ ll facctorialMethod(int n) {
 	return result;
 }
 
+// nPr
 ll permutationMethod(int n, int r) {
-	// nPr‚ğŒvZ
 	ll nNum = n - r;
 	ll result = 1;
 	for (int i = n; i > nNum; i--) {
@@ -33,8 +33,9 @@ ll permutationMethod(int n, int r) {
 	return result;
 }
 
+// nCr
 ll combinationMethod(int n, int r) {
-	// nCr‚ğŒvZ
 	ll result = permutationMethod(n, r) / facctorialMethod(r);
 	return result;
 }
+
