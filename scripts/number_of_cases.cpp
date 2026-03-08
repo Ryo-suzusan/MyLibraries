@@ -35,7 +35,14 @@ ll permutationMethod(int n, int r) {
 
 // nCr
 ll combinationMethod(int n, int r) {
-	ll result = permutationMethod(n, r) / facctorialMethod(r);
+	if (r > n) return 0;
+	if (n - r < r) r = n - r;
+	if (r == 0) return 1;
+
+	ll result = n;
+	for (int i = 2; i <= r; i++) {
+		result *= (n - i + 1);
+		result /= i;
+	}
 	return result;
 }
-
