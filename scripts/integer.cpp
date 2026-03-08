@@ -82,6 +82,23 @@ vector<pair<ll, ll>> primeFactorize(ll n) {
 	return result;
 }
 
+vector<bool> Eratosthenes(int n) {
+	vector<bool> is_prime(n + 1, true);
+
+	is_prime[0] = false;
+	is_prime[1] = false;
+
+	for (int p = 2; p <= n; p++) {
+		if (!is_prime[p]) continue;
+
+		for (int q = p * 2; q <= n; q += p) {
+			is_prime[q] = false;
+		}
+	}
+
+	return is_prime;
+}
+
 ll eulerMethod(ll n) {
 	const auto& pf = primeFactorize(n);
 	ll result = n;
@@ -114,3 +131,4 @@ ll modinv(ll a, ll mod) {
 	return u;
 
 }
+
