@@ -45,7 +45,7 @@ void knapsackDP(const vector<ll>& weight, const vector<ll>& value, LLGraph& dp) 
 	}
 }
 
-ll intervalDP(vector<vector<ll>>& dp, int left, int right) {
+ll intervalDP(LLGraph& dp, int left, int right) {
 	// -1は未探索
 	if (dp[left][right] != -1) return dp[left][right];
 	if (abs(left - right) < 1) return dp[left][right] = 0;
@@ -61,7 +61,7 @@ ll intervalDP(vector<vector<ll>>& dp, int left, int right) {
 	return dp[left][right] = result;
 }
 
-ll bitDP(vector<vector<ll>>& dp, const vector<vector<ll>>& dist, int bit, int v) {
+ll bitDP(LLGraph& dp, const LLGraph& dist, int bit, int v) {
 	// dpは事前にサイズ[1<<データ数][データ数]で初期化済みとする
 	int N = dp[0].size();
 
@@ -103,23 +103,24 @@ vector<ll> makeLIS(vector<ll> v) {
 }
 
 // いもす法: 左上, 右下を+1、右上, 左下を-1で初期化済みとする
-void imosCumulate(Graph& tiles) {
+void imosCumulate(LLGraph& tiles) {
 	int h = tiles.size();
 	int w = tiles[0].size();
 
 	// 横方向の累積和
 	for (int y = 0; y < h; y++) {
-		for (int x = 1; x < h; x++) {
+		for (int x = 1; x < w; x++) {
 			tiles[y][x] += tiles[y][x - 1];
 		}
 	}
 	// 縦方向の累積和
 	for (int y = 1; y < h; y++) {
-		for (int x = 0; x < h; x++) {
+		for (int x = 0; x < w; x++) {
 			tiles[y][x] += tiles[y - 1][x];
 		}
 	}
 }
+
 
 
 
