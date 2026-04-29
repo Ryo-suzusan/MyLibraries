@@ -1,0 +1,96 @@
+" setting
+" 入力中のコマンドをステータスに表示する
+set showcmd
+" jjでインサートから抜ける
+inoremap <silent> jj <ESC>
+" uuでインサートから抜ける
+inoremap <silent> uu <ESC>
+" ctrl+^で行末に行く
+nnoremap <C-^> $
+vnoremap <C-^> g$
+" 大きく移動する
+nnoremap J 10j
+nnoremap K 10k
+nnoremap L 10l
+nnoremap H 10h
+vnoremap J 10j
+vnoremap K 10k
+vnoremap L 10l
+vnoremap H 10h
+" 全選択
+vnoremap , <ESC>ggVG
+" 大文字化
+nnoremap guu gUl;
+
+
+" 見た目系
+" 行番号を表示
+set number
+" 現在の行を強調表示
+set cursorline
+" 行末の1文字先までカーソルを移動できるように
+set virtualedit=onemore
+" ステータスラインを常に表示
+set laststatus=2
+" 折り返し時に表示行単位での移動できるようにする
+nnoremap j gj
+nnoremap k gk
+
+
+" Tab系
+" 不可視文字を可視化(タブが「▸-」と表示される)
+" set list listchars=tab:\▸\-
+" Tab文字を半角スペースにする
+" set expandtab
+" 行頭以外のTab文字の表示幅（スペースいくつ分）
+set tabstop=4
+" 行頭でのTab文字の表示幅
+set shiftwidth=4
+
+
+" 検索系
+" 検索文字列が小文字の場合は大文字小文字を区別なく検索する
+set ignorecase
+" 検索文字列に大文字が含まれている場合は区別して検索する
+set smartcase
+" 検索文字列入力時に順次対象文字列にヒットさせる
+set incsearch
+" 検索時に最後まで行ったら最初に戻る
+set wrapscan
+" 検索語をハイライト表示
+set hlsearch
+" ESC連打でハイライト解除
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
+
+
+" Peasymotion用設定
+" gS prefix is added for ViEmu, no use for VsVim AFAIK.
+"VsVim and ViEmu are disabled until PeasyMotion finishes
+
+"Whole viewport jump-to-word beginning mode:
+nnoremap <Space>w gS:vsc Tools.InvokePeasyMotion<CR>
+nnoremap <Space>e gS:vsc Tools.InvokePeasyMotion<CR>
+nnoremap <Space>r gS:vsc Tools.InvokePeasyMotion<CR>
+vnoremap <Space>w gS:vsc Tools.InvokePeasyMotion<CR>
+vnoremap <Space>e gS:vsc Tools.InvokePeasyMotion<CR>
+vnoremap <Space>r gS:vsc Tools.InvokePeasyMotion<CR>
+
+"Select text from current caret position to desired jump label (fwd and reverse directions supported)
+nmap ;; gS:vsc Tools.InvokePeasyMotionTextSelect<CR>
+
+"Jump to word beginning in current line
+nmap zw gS:vsc Tools.InvokePeasyMotionLineJumpToWordBegining<CR>
+"Jump to word ending in current line
+nmap ze gS:vsc Tools.InvokePeasyMotionLineJumpToWordEnding<CR>
+
+"Jump to any open document tab
+nmap ;w gS:vsc Tools.InvokePeasyMotionJumpToDocumentTab<CR>
+
+"Jump to line beginning:
+nmap ;l gS:vsc Tools.InvokePeasyMotionJumpToLineBegining<CR>
+
+"Two char search mode:
+nmap <Space>s gS:vsc Tools.InvokePeasyMotionTwoCharJump<CR>
+
+"One char search mode:
+nmap ;v gS:vsc Tools.InvokePeasyMotionOneCharJump<CR>
